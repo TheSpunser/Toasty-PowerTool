@@ -1,0 +1,25 @@
+﻿<Window x:Class="Toasty_s_PowerTool__Final_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Toasty_s_PowerTool__Final_"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="600">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FF8E5A1A" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label Content="Toasty's PowerTool" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="232" HorizontalContentAlignment="Center" FontSize="18" FontFamily="Cascadia Code SemiBold" Foreground="White" FontWeight="Heavy"/>
+        <Button Content="Get LAPS Password" HorizontalAlignment="Left" Margin="10,77,0,0" VerticalAlignment="Top" Height="31" Width="114"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Height="31" Width="114"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,219,0,0" VerticalAlignment="Top" Height="31" Width="114"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" Height="31" Width="114"/>
+
+
+        <Label Content="qQAgAEEAUwAxACgAVAApACAAIgBUAG8AYQBzAHQAeQAiACAATABhAHkAbABhAG4AZAA=" HorizontalAlignment="Center" Margin="0,548,0,0" VerticalAlignment="Top" Width="510" HorizontalContentAlignment="Center"/>
+    </Grid>
+</Window>
