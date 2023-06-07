@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Toasty_s_PowerTool__Final_"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="600">
+        Title="Toasty's PowerTools" Height="482" Width="600">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -13,13 +13,28 @@
                 <GradientStop Color="#FF8E5A1A" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Label Content="Toasty's PowerTool" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="232" HorizontalContentAlignment="Center" FontSize="18" FontFamily="Cascadia Code SemiBold" Foreground="White" FontWeight="Heavy"/>
-        <Button Content="Get LAPS Password" HorizontalAlignment="Left" Margin="10,77,0,0" VerticalAlignment="Top" Height="31" Width="114"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Height="31" Width="114"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,219,0,0" VerticalAlignment="Top" Height="31" Width="114"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,292,0,0" VerticalAlignment="Top" Height="31" Width="114"/>
-
-
-        <Label Content="qQAgAEEAUwAxACgAVAApACAAIgBUAG8AYQBzAHQAeQAiACAATABhAHkAbABhAG4AZAA=" HorizontalAlignment="Center" Margin="0,548,0,0" VerticalAlignment="Top" Width="510" HorizontalContentAlignment="Center"/>
+        <Label x:Name="Banner" Content="Toasty's PowerTools" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Width="232" HorizontalContentAlignment="Center" FontSize="18" FontFamily="Cascadia Code SemiBold" Foreground="White" FontWeight="Bold"/>
+        <Button x:Name="LAPS" Content="Get LAPS Password" HorizontalAlignment="Center" Margin="0,80,0,0" VerticalAlignment="Top" Height="40" Width="114" FontWeight="Bold" Background="#FFD4A02F" BorderBrush="#FFFF9898"/>
+        <Button x:Name="ISE" Content="Open ISE" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Height="40" Width="114" Click="Button_Click" Background="#FFD4A02F" FontWeight="Bold"/>
+        <Button x:Name="CMD" Content="Open CMD" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Height="40" Width="114" Background="#FFD4A02F" FontWeight="Bold"/>
+        <Button x:Name="CCM02" Content="           Open &#xA;Deployment Share" HorizontalAlignment="Left" Margin="10,260,0,0" VerticalAlignment="Top" Height="40" Width="114" UseLayoutRounding="True" Background="#FFD4A02F" FontWeight="Bold"/>
+        <TextBox x:Name="UADName" Margin="0,46,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="AWM-WAD-S-" VerticalAlignment="Top" Width="160" Height="22" HorizontalAlignment="Center" CharacterCasing="Upper" FontFamily="Arial" Background="#FFFF9898"/>
+        <Button x:Name="CSF" Content="Open CSF Utils" HorizontalAlignment="Left" Margin="10,320,0,0" VerticalAlignment="Top" Width="114" Height="40" Click="Button_Click" Background="#FFD4A02F" FontWeight="Bold"/>
+        <Button x:Name="Helix" Content="Open Helix" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="114" Height="40" Background="#FFD4A02F" FontWeight="Bold" Foreground="Black"/>
+        <Button x:Name="RemDesktop" Content="Remote Desktop" HorizontalAlignment="Center" Margin="0,140,0,0" VerticalAlignment="Top" Width="114" Height="40" FontWeight="Bold" Background="#FFD4A02F" BorderBrush="#FFFF9898"/>
+        <Button x:Name="Restart" Content="Restart UAD" HorizontalAlignment="Left" Margin="476,80,0,0" VerticalAlignment="Top" Width="114" Height="40" FontWeight="Bold" Background="#FFD4A02F" BorderBrush="#FFFF9898"/>
+        <Button x:Name="Ping" Content="Ping UAD" HorizontalAlignment="Center" Margin="0,260,0,0" VerticalAlignment="Top" Height="40" Width="114" FontWeight="Bold" Background="#FFD4A02F" BorderBrush="#FFFF9898"/>
+        <Button x:Name="Files" Content="Open UAD &#xD;&#xA;Filesystem" HorizontalAlignment="Center" Margin="0,320,0,0" VerticalAlignment="Top" Width="114" Height="40" FontWeight="Bold" Background="#FFD4A02F" BorderBrush="#FFFF9898"/>
+        <Button x:Name="RSATT" Content="Install RSATT Tools" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" Width="114" Height="40" FontWeight="Bold" Background="#FFD4A02F" BorderBrush="#FFFF9898"/>
+        <Button x:Name="Registry" Content="Open Registry" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Width="114" Height="40" Background="#FFD4A02F" FontWeight="Bold"/>
+        <Button x:Name="GPUpd" Content="    Update&#xD;&#xA;Group Policy" HorizontalAlignment="Left" Margin="476,260,0,0" VerticalAlignment="Top" Height="40" Width="114" FontWeight="Bold" Background="#FFD4A02F" BorderBrush="#FFFF9898"/>
+        <Button x:Name="Uninstall" Content="Uninstall Software" HorizontalAlignment="Left" Margin="476,140,0,0" VerticalAlignment="Top" Width="114" Height="40" FontWeight="Bold" Background="#FFD4A02F" BorderBrush="#FFFF9898"/>
+        <Button x:Name="WSUS" Content="    Force Restart&#xD;&#xA;Windows Update" HorizontalAlignment="Left" Margin="476,200,0,0" VerticalAlignment="Top" Width="114" Height="40" FontWeight="Bold" Background="#FFD4A02F" BorderBrush="#FFFF9898"/>
+        <Button x:Name="ProfReset" Content="Profile Reset" HorizontalAlignment="Left" Margin="476,320,0,0" VerticalAlignment="Top" Width="114" Height="40" FontWeight="Bold" Background="#FFD4A02F" BorderBrush="#FFFF9898"/>
+        <Button x:Name="Solarwinds" Content="Open SolarWinds" HorizontalAlignment="Center" Margin="0,380,0,0" VerticalAlignment="Top" Height="40" Width="114" Background="#FFD4A02F" FontWeight="Bold"/>
+        <Button x:Name="Clone" Content="Clone UAD &#xD;&#xA;  D:\ Drive" HorizontalAlignment="Left" Margin="476,380,0,0" VerticalAlignment="Top" Height="40" Width="114" FontWeight="Bold" Background="#FFD4A02F" BorderBrush="#FFFF9898"/>
+        <Label x:Name="UserLoggedIn" Content="Logged in as: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="185" FontFamily="Cascadia Code SemiBold" Foreground="White" FontWeight="Bold" FontSize="10"/>
+        <Label x:Name="CR_B64" Content="qQAgAEEAUwAxACgAVAApACAAIgBUAG8AYQBzAHQAeQAiACAATABhAHkAbABhAG4AZAA=" HorizontalAlignment="Center" Margin="0,431,0,0" VerticalAlignment="Top" Width="510" HorizontalContentAlignment="Center"/>
+        <Label x:Name="Information" Content="Functions with PINK &#xD;&#xA;borders require a &#xD;&#xA;valid UAD name" HorizontalAlignment="Left" Margin="454,10,0,0" VerticalAlignment="Top" Width="136" FontFamily="Cascadia Code SemiBold" Foreground="#FFFF9CD2" FontWeight="Bold" FontSize="10" Height="47"/>
     </Grid>
 </Window>

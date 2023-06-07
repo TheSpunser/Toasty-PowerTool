@@ -86,6 +86,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Deployment Folder\Install.bat" />
+    <None Include="Deployment Folder\PS\MEXE.ps1" />
+    <None Include="Deployment Folder\PS\Toasty%27s PowerTools.ps1" />
+    <None Include="Deployment Folder\Uninstall.bat" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Deployment Folder\PS\V1.txt" />
+    <Resource Include="Deployment Folder\Capabilities List.txt" />
+    <Resource Include="Deployment Folder\ist.ico" />
+    <Content Include="Deployment Folder\powershell.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

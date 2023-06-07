@@ -1,0 +1,33 @@
+Get LAPS Password - Button and Text Entry
+
+Open ISE - Button
+
+Open CMD - Button
+
+Remote Desktop - Button and Text Entry
+
+Restart UAD - Buton and Text Entry
+
+Open CCM02 - Button
+
+Open CSF Utils - Button
+
+Install RSATT Tools - Button and Text Entry
+
+Open Registry - Button 
+
+Ping - Button and Text Entry
+
+Open Remote UAD File System - Button and Text Entry
+
+Open Helix - Button
+
+Push Group Policy Update - Button and Text Entry
+
+Uninstall Software - Button and Text Entry
+
+Profile Reset - Button and Text Entry
+
+Force Windows Update
+
+Copy UAD D drive to CSF Utils
