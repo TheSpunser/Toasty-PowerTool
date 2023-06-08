@@ -11,3 +11,9 @@
 - Added complete XAML layout
 - Added Deployment folder
 - DEPLOYMENT FOLDER HOUSES THE POWERSHELL SCRIPT
+
+
+# v-ALPHA.0.2
+- Removed Sentitive Information
+- Encrypted certain variables
+- Created security measure to ensure only domain accounts with admin privs can run functions

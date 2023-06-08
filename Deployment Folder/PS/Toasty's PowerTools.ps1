@@ -6,36 +6,24 @@ Add-Type -AssemblyName PresentationFramework, System.Windows.Forms
     
 #-------[Form]-------
 
-function MainPrompt {
-
-$Form = New-Object System.Windows.Forms.Form
-$Form.Text = "Toasty's PowerTools"
-$Form
-
-}
+ # - - - XAML REFERENCE GOES HERE - - - #
 
 #-------[Functions]-------
 
-##   ---   TO DO   ---   ##
-
     #   Get LAPS Password
+
+    $Enc = "QQBXAFYALQBXAEEARAAtAFMALQBEAEMAMAAxAA=="
+    $Bytes = [System.Convert]::FromBase64String($Enc)
+    $Text = [System.Text.Encoding]::Unicode.GetString($Bytes)
+
     $UAD = $null # Temp Param
     $wshell = New-Object -ComObject Wscript.shell
     $creds = Get-Credential -UserName "AWC_DOMAIN\_" -Message "Enter Creds"
-    try {$Pass = Get-LapsADPassword -Identity $UAD -DomainController AWV-WAD-S-DC01 -DecryptionCredential $creds -Credential $creds -AsPlainText | Select-Object Password -ExpandProperty Password }
+    try {$Pass = Get-LapsADPassword -Identity $UAD -DomainController $Text -DecryptionCredential $creds -Credential $creds -AsPlainText | Select-Object Password -ExpandProperty Password }
     catch [Microsoft.Windows.LAPS.GetLapsADPassword] {
         "UAD not Present in AD"
     }
     #$Pass
-    
-    if (!($Pass -eq $null)) {
-        $wshell.Popup("LAPS Password: $Pass",0,"Done",0x1)
-    }else{
-        Catch {
-            $wshell.Popup("UAD Not Present in LAPS DB! Possibly Fallen Off the Domain.",0,"Error",0x1)
-        }
-    }
-    
 
     #   Open Powershell ISE as Admin
 
@@ -51,15 +39,23 @@ $Form
 
     #   Restart UAD Remotely
 
+    Get-Service -Name WinRM -ComputerName $UAD | Set-Service -Status Running | Set-Service -StartupType Automatic
     Restart-Computer -ComputerName $UAD -Credential $creds -Force
 
     #   Open CCM02 Deployment Share
 
-    Start-Process explorer -ArgumentList "\\AWV-WAD-S-CCM02\Deployment Share"
+    $Enc = "XABcAEEAVwBWAC0AVwBBAEQALQBTAC0AQwBDAE0AMAAyAFwARABlAHAAbABvAHkAbQBlAG4AdAAgAFMAaABhAHIAZQA="
+    $Bytes = [System.Convert]::FromBase64String($Enc)
+    $Text = [System.Text.Encoding]::Unicode.GetString($Bytes)
+
+    Start-Process explorer -ArgumentList ($Text.ToString())
 
     #   Install RSATT Tools (Possiblility of remote install?)
-
-    Copy-Item -Path "\\AWV-WAD-S-UTL01\CSF Utils\Software Library\RSATTools" -Recurse -Destination "\\$UAD\D$" -Force -Credential $creds
+    $Enc = "XABcAEEAVwBWAC0AVwBBAEQALQBTAC0AVQBUAEwAMAAxAFwAQwBTAEYAIABVAHQAaQBsAHMAXABTAG8AZgB0AHcAYQByAGUAIABMAGkAYgByAGEAcgB5AFwAUgBTAEEAVABUAG8AbwBsAHMA"
+    $Bytes = [System.Convert]::FromBase64String($Enc)
+    $Text = [System.Text.Encoding]::Unicode.GetString($Bytes)
+    Copy-Item -Path $Text.ToString() -Recurse -Destination "\\$UAD\D$" -Force -Credential $creds
+    Get-Service -Name WinRM -ComputerName $UAD | Set-Service -Status Running | Set-Service -StartupType Automatic
     Invoke-Command -ComputerName $UAD -Credential $creds -ScriptBlock { Get-WindowsCapability -Name RSAT* -Online -Source D:\RSATTools | Add-WindowsCapability -Online -Source D:\RSATTools }
 
     #   Open Registry
@@ -97,54 +93,64 @@ $Form
 
     #   Open Helix
 
-    Start-Process MSEdge.exe -ArgumentList "http://awv-wad-s-hlx04.awc.mod1.gb:8080/smartit/app/#/ticket-console"
+    $Enc = "aAB0AHQAcAA6AC8ALwBhAHcAdgAtAHcAYQBkAC0AcwAtAGgAbAB4ADAANAAuAGEAdwBjAC4AbQBvAGQAMQAuAGcAYgA6ADgAMAA4ADAALwBzAG0AYQByAHQAaQB0AC8AYQBwAHAALwAjAC8AdABpAGMAawBlAHQALQBjAG8AbgBzAG8AbABlAA=="
+    $Bytes = [System.Convert]::FromBase64String($Enc)
+    $Text = [System.Text.Encoding]::Unicode.GetString($Bytes)
+
+    Start-Process MSEdge.exe -ArgumentList $Text
 
     #   Open CSF Utils Drive
 
-    Start-Process explorer -ArgumentList "\\AWV-WAD-S-UTL01\CSF Utils"
+    $Enc = "XABcAEEAVwBWAC0AVwBBAEQALQBTAC0AVQBUAEwAMAAxAFwAQwBTAEYAIABVAHQAaQBsAHMA"
+    $Bytes = [System.Convert]::FromBase64String($Enc)
+    $Text = [System.Text.Encoding]::Unicode.GetString($Bytes)
+
+    Start-Process explorer -ArgumentList $Text.ToString()
 
     #   Push Group Policy Update
 
-    Invoke-GPUpdate -Computer $UAD -Force
-
-    #   Push Group Policy Update on remote UAD
-
+    Get-Service -Name WinRM -ComputerName $UAD | Set-Service -Status Running | Set-Service -StartupType Automatic
     Invoke-GPUpdate -Computer $UAD -Force
 
     #   Uninstall specified software
 
-
-    #   Uninstall specified software on remote UAD
-
+    $app = Get-WmiObject -Class Win32_Product | Where-Object {$_.Name -like "*$inputApp*"}
+    $app.Uninstall()
 
     #   Perform Profile Reset
 
 
     #   Force Windows Update
 
+    Get-Service -Name WinRM -ComputerName $UAD | Set-Service -Status Running | Set-Service -StartupType Automatic
     Invoke-Command -ComputerName $UAD -Credential $creds -ScriptBlock { 
 
         $check = Get-Service -Name wuauserv | Select-Object Status -ExpandProperty Status
 
         if ($check.ToString() -eq 'Stopped') {
-            Set-Service -Name wuauserv -StartupType Disabled
+            Set-Service -Name wuauserv -Status Stopped -StartupType Disabled
         }
         elseif ($check.ToString() -eq 'Running' -or $check.ToString() -eq 'Stopping') {
-            Stop-Service -Name wuauserv -Force
-            Set-Service -Name wuauserv -StartupType Disabled
+            Set-Service -Name wuauserv -Status Stopped -StartupType Disabled
         }
 
         Remove-Item -Path "C:\Windows\SoftwareDistribution" -Recurse -Confirm:$false -Force
-        Start-Service -Name wuauserv
-        Set-Service -Name wuauserv -StartupType Automatic
+        Set-Service -Name wuauserv -StartupType Automatic -Status Running
      }
 
     #   Copy User's D drive to CSF Utils
-    $UAD = "AWM-WAD-S-718" # Temp Param
-    New-PSDrive -Name "DriveCopy" -PSProvider FileSystem -Root "\\$UAD\D$" -Credential $creds
+
+    $Enc = "XABcAGEAdwB2AC0AdwBhAGQALQBzAC0AdQB0AGwAMAAxAFwAQwBTAEYAIABVAHQAaQBsAHMAXABJAFMAIABUAGUAYQBtAFwARAAgAEQAcgBpAHYAZQBzAA=="
+    $Bytes = [System.Convert]::FromBase64String($Enc)
+    $Text = [System.Text.Encoding]::Unicode.GetString($Bytes)
+
+    $gdate = Get-Date -Format "yyyy-MM-dd HH-mm-ss"
+    $date = $gdate.ToString()
+    New-PSDrive -Name $date -PSProvider FileSystem -Root "\\$UAD\D$" -Credential $creds
     Start-Sleep -Seconds 5
     $Path = Get-PSDrive -Name DriveCopy | Select-Object Root -ExpandProperty Root
-    Copy-Item -Path $Path -Recurse -Destination "\\awv-wad-s-utl01\CSF Utils\IS Team\D Drives\$UAD" -Force
+    Copy-Item -Path $Path -Recurse -Destination "'$Text'\'$UAD'" -Force
+    Remove-PSDrive -Name $date -Confirm:$false
 
 
 #-------[Script]-------

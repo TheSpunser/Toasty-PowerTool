@@ -101,7 +101,6 @@
   <ItemGroup>
     <Resource Include="Deployment Folder\PS\V1.txt" />
     <Resource Include="Deployment Folder\Capabilities List.txt" />
-    <Resource Include="Deployment Folder\ist.ico" />
     <Content Include="Deployment Folder\powershell.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
