@@ -1,6 +1,6 @@
 # Toasty's PowerTools
 
-- For use in ASWC CIS only.
+- For use in CIS only.
 - Will not work anywhere else.
 
 - XAML.NET WPF Application with Powershell backend
